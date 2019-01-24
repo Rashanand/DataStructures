@@ -24,6 +24,28 @@ public class CLLTest {
 		cll.replace(8, 100);
 		System.out.println(cll);
 		System.out.println(cll.contains(100));
+		cll.remove(7);
+		System.out.println(cll);
+		cll.removeFirst();
+		System.out.println(cll);
+		cll.remove(1);
+		System.out.println(cll);
+		cll.removeLast();
+		System.out.println(cll);
+		cll.remove(5);
+		System.out.println(cll);
+		cll.removeIndex(2);
+		System.out.println(cll);
+		cll.add(2);
+		cll.add(3);
+		cll.add(4);
+		cll.add(5);
+		cll.add(6);
+		System.out.println(cll);
+		cll.removeIndex(0);
+		System.out.println(cll);
+		cll.removeIndex(5);
+		System.out.println(cll);
 	}
 
 }

@@ -116,6 +116,7 @@ public class CircularLinkedList {
 			if(currNode.getData().equals(existObj)) {
 				currNode.setData(newObj);
 				oldObj = existObj;
+				break;
 			}
 			currNode = currNode.getNext();
 		} while(currNode != head);
@@ -123,24 +124,105 @@ public class CircularLinkedList {
 		return oldObj;
 	}
 	
-	public boolean deleteFirst() {
-		return deleteIndex(0);
-	}
-	
-	public boolean deleteLast() {
-		return deleteIndex(size() - 1);
-	}
-	
-	public boolean deleteIndex(int index) {
-		boolean isDeleted = false;
+	public boolean removeFirst() {
+		boolean isRemoved = false;
 		
-		return isDeleted;
+		if(head == null) {
+			System.out.println("Can'nt perform task - null list.");
+			return false;
+		}
+		
+		if(head.getNext() == head) {
+			head = null;
+			isRemoved = true;
+		}
+		else {
+			LinkedList currNode = head;
+			while(currNode.getNext() != head) {
+				currNode = currNode.getNext();
+			}
+			currNode.setNext(head.getNext());
+			head = head.getNext();
+			isRemoved = true;
+		}
+			
+		return isRemoved;
 	}
 	
-	public boolean delete(Object obj) {
-		boolean isDeleted = false;
+	public boolean removeLast() {
+		boolean isRemoved = false;
 		
-		return isDeleted;
+		if(head == null) {
+			System.out.println("Can'nt perform task - null list.");
+			return false;
+		}
+		
+		if(head.getNext() == head) {
+			head = null;
+			isRemoved = true;
+		}
+		else {
+			LinkedList currNode = head;
+			while(currNode.getNext().getNext() != head) {
+				currNode = currNode.getNext();
+			}
+			currNode.setNext(head);
+		}
+		return isRemoved;
+	}
+	
+	public boolean removeIndex(int index) {
+		boolean isRemoved = false;
+		
+		if(head == null) {
+			System.out.println("Can'nt perform task - null list.");
+			return false;
+		}
+		
+		if(index == 0) {
+			isRemoved = removeFirst();
+		}
+		else if(index == size()-1) {
+			isRemoved = removeLast();
+		}
+		else {
+			isRemoved = remove(get(index));
+		}
+		
+		return isRemoved;
+	}
+	
+	public boolean remove(Object obj) {
+		boolean isRemoved = false;
+		
+		if(head == null) {
+			System.out.println("Can'nt perform task - null list.");
+			return false;
+		}
+		
+		LinkedList currNode = head;
+		LinkedList prevNode = null;
+		
+		do {
+			if(currNode.getData().equals(obj)) {
+				if(currNode == head) {
+					removeFirst();
+				}
+				else if(currNode.getNext() == head) {
+					removeLast();
+				}
+				else{
+					prevNode.setNext(currNode.getNext());
+					currNode.setNext(null);
+				}
+				isRemoved = true;
+				break;
+			}
+				prevNode = currNode;
+				currNode = currNode.getNext();
+		} while(currNode != head);
+		
+		return isRemoved;
 	}
 	
 	public boolean contains(Object obj) {
