@@ -46,6 +46,22 @@ public class CLLTest {
 		System.out.println(cll);
 		cll.removeIndex(5);
 		System.out.println(cll);
+		cll.add(10);
+		
+		CircularLinkedList[] two = cll.splitIntoTwoHalves();
+		System.out.println(two[0]+"  :  "+two[1]);
+		
+		System.out.println(cll);
+		cll.removeLast();
+		System.out.println(cll);
+		CircularLinkedList[] two1 = cll.splitIntoTwoHalves();
+		System.out.println(two1[0]+"  :  "+two1[1]);
+		
+		/*cll.removeLast();
+		System.out.println(cll);*/
+		
+		CircularLinkedList[] two11 = cll.splitIntoTwoHalves();
+		System.out.println(two11[0]+"  :  "+two11[1]);
 	}
 
 }

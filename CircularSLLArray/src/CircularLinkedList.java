@@ -258,6 +258,52 @@ public class CircularLinkedList {
 		return count;
 	}
 	
+	public CircularLinkedList[] splitIntoTwoHalves() {
+		if(isHeadNull()) {
+			return null;
+		}
+		CircularLinkedList[] halves = new CircularLinkedList[2];
+		
+		LinkedList hare = head;
+		LinkedList tortoise = head;
+
+		while(true) {
+			if(hare.getNext() == null || hare.getNext().getNext() == null) {
+				System.out.println("Loop not found");
+				return null;
+			}else if(hare.getNext() == head || hare.getNext().getNext() == head) {
+				System.out.println("Loop found");
+				break;
+			}
+			hare = hare.getNext().getNext();
+			tortoise = tortoise.getNext();
+		}
+		
+		if(hare.getNext().getNext() == head)
+			hare = hare.getNext();
+		
+		LinkedList secHead = tortoise.getNext();
+		tortoise.setNext(head);
+		hare.setNext(secHead);
+		
+		CircularLinkedList list1 = new CircularLinkedList();
+		CircularLinkedList list2 = new CircularLinkedList();
+		list1.head = this.head;
+		list2.head = secHead; 
+		halves[0] = list1;
+		halves[1] = list2;
+		
+		return halves;
+	}
+	
+	private boolean isHeadNull() {
+		if(head == null) {
+			System.out.println("Can'nt perform task - null list.");
+			return true;
+		}
+		return false;
+	} 
+	
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer("[");
