@@ -1,9 +1,15 @@
 
 public class CircularLinkedList {
 	private LinkedList head;
+	private boolean isSorted;
 
 	public CircularLinkedList() {
 		super();
+	}
+	
+	public CircularLinkedList(boolean isSorted) {
+		super();
+		this.isSorted = isSorted;
 	}
 	
 	public void add(Object obj) {
@@ -294,6 +300,39 @@ public class CircularLinkedList {
 		halves[1] = list2;
 		
 		return halves;
+	}
+	
+	public void addInSortedOrder(Object obj) {
+		LinkedList newNode = new LinkedList(obj, null);
+		
+		
+		LinkedList currNode = head;
+		//if list is null - attach the first element 
+		if(isHeadNull()) {
+			newNode.setNext(newNode);
+			head = newNode;
+			
+		}
+		//If data is smaller than head data (Insert at 0)
+		else if((Integer)currNode.getData() >= (Integer)newNode.getData()){
+			while(currNode.getNext() != head) {
+				currNode = currNode.getNext();
+			}
+			newNode.setNext(head);
+			currNode.setNext(newNode);
+			head = newNode;
+		}
+		//Insert in the middle
+		else {
+			while(currNode.getNext() != head) {
+				if((Integer)currNode.getNext().getData() > (Integer)newNode.getData()) {
+					newNode.setNext(currNode.getNext());
+					currNode.setNext(newNode);
+					break;
+				}
+				currNode = currNode.getNext();
+			}
+		}
 	}
 	
 	private boolean isHeadNull() {

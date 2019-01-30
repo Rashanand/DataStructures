@@ -2,7 +2,7 @@
 public class CLLTest {
 
 	public static void main(String[] args) {
-		CircularLinkedList cll = new CircularLinkedList();
+		/*CircularLinkedList cll = new CircularLinkedList();
 		
 		cll.add(1);
 		System.out.println(cll);
@@ -57,11 +57,20 @@ public class CLLTest {
 		CircularLinkedList[] two1 = cll.splitIntoTwoHalves();
 		System.out.println(two1[0]+"  :  "+two1[1]);
 		
-		/*cll.removeLast();
-		System.out.println(cll);*/
+		cll.removeLast();
+		System.out.println(cll);
 		
 		CircularLinkedList[] two11 = cll.splitIntoTwoHalves();
-		System.out.println(two11[0]+"  :  "+two11[1]);
+		System.out.println(two11[0]+"  :  "+two11[1]);*/
+		CircularLinkedList cll = new CircularLinkedList();
+		cll.addInSortedOrder(12);
+		cll.addInSortedOrder(3);
+		System.out.println(cll);
+		cll.addInSortedOrder(4);
+		cll.addInSortedOrder(6);
+		cll.addInSortedOrder(9);
+		cll.addInSortedOrder(7);
+		System.out.println(cll);
 	}
 
 }
