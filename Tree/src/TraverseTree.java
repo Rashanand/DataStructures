@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class TraverseTree {
 	
@@ -27,5 +29,28 @@ public class TraverseTree {
 		postOrder(root.getLeft());
 		postOrder(root.getRight());
 		System.out.println(root.getData());
+	}
+	
+	public static void levelOrder(TreeNode root) {
+		if(root == null) 
+			return;
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
+			System.out.println(currNode.getData());
+			
+			if(currNode.getLeft() != null) 
+				queue.add(currNode.getLeft());
+			
+			if(currNode.getRight() != null)
+				queue.add(currNode.getRight());
+		}
+	} 
+	
+	public static int getMax(TreeNode root) {
+		return 0;
 	}
 }

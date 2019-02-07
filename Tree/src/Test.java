@@ -9,8 +9,9 @@ public class Test {
 		root.getLeft().setLeft(new TreeNode(4));
 		root.getLeft().setRight(new TreeNode(5));
 		
-		TraverseTree.inOrder(root);
-		TraverseTree.preOrder(root);
-		TraverseTree.postOrder(root);
+		//TraverseTree.inOrder(root);
+		//TraverseTree.preOrder(root);
+		//TraverseTree.postOrder(root);
+		TraverseTree.levelOrder(root);
 	}
 }
