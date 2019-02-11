@@ -70,6 +70,7 @@ public class TraverseTree {
 		if(max > root.getData())
 			return max;
 		else
-			return root.getData(); 
+			return root.getData();
+		
 	}
 }
