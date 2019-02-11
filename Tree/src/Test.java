@@ -15,8 +15,7 @@ public class Test {
 		//TraverseTree.postOrder(root);
 		//TraverseTree.levelOrder(root);
 		//System.out.println(TraverseTree.getMax(root));
-		/*TraverseTree.getMax(root);
-		System.out.println(TraverseTree.max);*/
+	
 		System.out.println(TraverseTree.getMax(root));
 		
 		
