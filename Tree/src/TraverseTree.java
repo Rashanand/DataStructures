@@ -71,6 +71,5 @@ public class TraverseTree {
 			return max;
 		else
 			return root.getData();
-		
 	}
 }
