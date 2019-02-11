@@ -51,6 +51,25 @@ public class TraverseTree {
 	} 
 	
 	public static int getMax(TreeNode root) {
-		return 0;
+		int left, right, max;
+		
+		if(root == null) {
+			return 0;
+		}
+		
+		left = getMax(root.getLeft());
+		right = getMax(root.getRight());
+		
+		System.out.println("Left   root   right:"+left+"   "+root.getData()+"   "+right);
+		
+		if(left > right)
+			max = left;
+		else
+			max = right;
+		
+		if(max > root.getData())
+			return max;
+		else
+			return root.getData(); 
 	}
 }
