@@ -17,7 +17,5 @@ public class Test {
 		//System.out.println(TraverseTree.getMax(root));
 	
 		System.out.println(TraverseTree.getMax(root));
-		
-		
 	}
 }
