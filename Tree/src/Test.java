@@ -39,8 +39,11 @@ public class Test {
 		tree.add(4);
 		
 		tree.levelOrder();
-		tree.inOrder();
-		tree.preOrder();
-		tree.postOrder();
+		//tree.inOrder();
+		//tree.preOrder();
+		//tree.postOrder();
+		
+		tree.delete(11);
+		tree.levelOrder();
 	}
 }

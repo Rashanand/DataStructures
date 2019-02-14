@@ -105,9 +105,50 @@ public class CustomeTree {
 		System.out.println();
 	}
 	
-	public int delete() {
-		return 0;
+	public boolean delete(int data) {
+		boolean isDeleted = false;
+		
+		if(root == null)
+			return false;
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		TreeNode dataNode = null;
+		TreeNode lastNode = null;
+		TreeNode parent = null;
+		
+		while(!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
+			
+			if(currNode.getData() == data)
+				dataNode = currNode;
+			
+			lastNode = currNode;
+			if(currNode.getLeft() != null) {
+				queue.add(currNode.getLeft());
+				parent = currNode;
+			}	
+			if(currNode.getRight() != null) {
+				queue.add(currNode.getRight());
+				parent = currNode;
+			}	
+		}
+		
+		if(dataNode != null && lastNode != null) {
+			dataNode.setData(lastNode.getData());
+			
+			if(parent.getRight().getData() == lastNode.getData())
+				parent.setRight(null);
+			else if(parent.getLeft().getData() == lastNode.getData())
+				parent.setLeft(null);
+			
+			isDeleted = true;
+		}
+		
+		return isDeleted;
 	}
+	
 	
 	public int getMax() {
 		return getMax(root);
