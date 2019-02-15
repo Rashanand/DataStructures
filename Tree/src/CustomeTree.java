@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class CustomeTree {
 	private TreeNode root;
@@ -257,4 +259,120 @@ public class CustomeTree {
 		
 		return min;
 	}
+	
+	public void levelOrderReverse() {
+		if(root == null) {
+			System.out.println("Tree not initialized");
+			return ;
+		}
+		
+		//Get from queue add to stack.
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
+			stack.push(currNode);
+			
+			if(currNode.getRight() != null)
+				queue.add(currNode.getRight());
+			if(currNode.getLeft() != null)
+				queue.add(currNode.getLeft());
+		}
+		
+		while(!stack.isEmpty()) {
+			System.out.print(stack.pop().getData()+" ");
+		}
+	}
+	//Do in recursion without queue & stack
+	public void allLeaves() {
+		if(root == null) {
+			System.out.println("Tree not initialized");
+			return ;
+		}
+		
+		ArrayList<TreeNode> leaves = new ArrayList<TreeNode>();
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
+			
+			boolean noLeft = false; 
+			
+			if(currNode.getLeft() != null) {
+				queue.add(currNode.getLeft());
+			}	
+			else {
+				noLeft = true;
+			}
+			
+			if(currNode.getRight() != null) {
+				queue.add(currNode.getRight());
+			}
+			else {
+				if(noLeft)
+					leaves.add(currNode);
+			}
+		}
+		for (TreeNode treeNode : leaves) {
+			System.out.print(treeNode.getData()+" ");
+		}
+		System.out.println();
+	}
+	//Do in recursion without queue & stack
+	public void allFullNodes() {
+		if(root == null) {
+			System.out.println("Tree not initialized");
+			return ;
+		}
+		
+		ArrayList<TreeNode> allFullNodes = new ArrayList<TreeNode>();
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
+			
+			boolean left = false;
+			
+			if(currNode.getLeft() != null) {
+				queue.add(currNode.getLeft());
+				left = true;
+			}
+			
+			if(currNode.getRight() != null) {
+				queue.add(currNode.getRight());
+				if(left) {
+					allFullNodes.add(currNode);
+				}
+			}
+		}
+		for (TreeNode treeNode : allFullNodes) {
+			System.out.print(treeNode.getData()+" ");
+		}
+		System.out.println();
+	}
+	//Do in recursion without queue & stack
+	public void deepestNode() {
+		if(root == null) {
+			System.out.println("Tree not initialized");
+			return ;
+		}
+		
+		TreeNode deepNode = null;
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) {
+			deepNode = queue.poll();
+			if(deepNode.getLeft() != null)
+				queue.add(deepNode.getLeft());
+			if(deepNode.getRight() != null)
+				queue.add(deepNode.getRight());
+		}
+		System.out.println(deepNode.getData());
+	}
+	
 }

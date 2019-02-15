@@ -38,12 +38,17 @@ public class Test {
 		tree.add(3);
 		tree.add(4);
 		
-		tree.levelOrder();
+		//tree.levelOrder();
 		//tree.inOrder();
 		//tree.preOrder();
 		//tree.postOrder();
 		
-		tree.delete(11);
-		tree.levelOrder();
+		//tree.delete(11);
+		//tree.levelOrder();
+		//tree.levelOrderReverse();
+		//tree.allLeaves();
+		//tree.allFullNodes();
+		//tree.deepestNode();
+		
 	}
 }
