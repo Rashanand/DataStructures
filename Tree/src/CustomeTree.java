@@ -375,4 +375,36 @@ public class CustomeTree {
 		System.out.println(deepNode.getData());
 	}
 	
+	public void printLevelWise() {
+		if(root == null) {
+			System.out.println("Tree not initialized");
+			return ;
+		}
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		queue.add(null); //One level complete.
+		
+		int count = 1; // Counting the no of nodes on a level 
+		while(!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
+			
+			if(currNode == null) { //level complete.
+				System.out.println("\n");
+				count = 0;
+			}
+			else {
+				if(currNode.getLeft() != null) {
+					queue.add(currNode.getLeft());
+					count++;
+				}	
+				if(currNode.getRight() != null) {
+					queue.add(currNode.getRight());
+					count++;
+				}	
+			}
+		}
+		
+	}
+	
 }
