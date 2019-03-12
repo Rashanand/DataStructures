@@ -50,5 +50,7 @@ public class Test {
 		//tree.allFullNodes();
 		//tree.deepestNode();
 		tree.printLevelWise();
+		
+		
 	}
 }
