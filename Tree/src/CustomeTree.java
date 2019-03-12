@@ -385,25 +385,27 @@ public class CustomeTree {
 		queue.add(root);
 		queue.add(null); //One level complete.
 		
-		int count = 1; // Counting the no of nodes on a level 
+		int count = 0; // Counting the no of nodes on a level 
 		while(!queue.isEmpty()) {
 			TreeNode currNode = queue.poll();
 			
 			if(currNode == null) { //level complete.
-				System.out.println("\n");
-				count = 0;
+				System.out.println();
+				count++;
+				if(!queue.isEmpty())
+					queue.add(null);
 			}
 			else {
+				System.out.print(currNode.getData()+" ");
 				if(currNode.getLeft() != null) {
 					queue.add(currNode.getLeft());
-					count++;
 				}	
 				if(currNode.getRight() != null) {
 					queue.add(currNode.getRight());
-					count++;
 				}	
 			}
 		}
+		System.out.println("Height : "+count);
 		
 	}
 	

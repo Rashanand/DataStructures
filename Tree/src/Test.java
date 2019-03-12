@@ -27,9 +27,9 @@ public class Test {
 	public static void main(String[] args) {
 		CustomeTree tree = new CustomeTree();
 		
-		System.out.println(tree.add(10));
-		System.out.println(tree.add(11));
-		System.out.println(tree.add(9));
+		//System.out.println(tree.add(10));
+		//System.out.println(tree.add(11));
+		//System.out.println(tree.add(9));
 		
 		tree.add(1);
 		tree.add(2);
@@ -49,6 +49,6 @@ public class Test {
 		//tree.allLeaves();
 		//tree.allFullNodes();
 		//tree.deepestNode();
-		
+		tree.printLevelWise();
 	}
 }
