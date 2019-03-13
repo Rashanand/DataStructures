@@ -33,11 +33,14 @@ public class Test {
 		
 		tree.add(1);
 		tree.add(2);
-		tree.add(6);
-		tree.add(5);
 		tree.add(3);
 		tree.add(4);
-		
+		tree.add(5);
+		tree.add(6);
+		tree.add(7);
+		tree.add(8);
+		tree.add(9);
+		tree.add(10);
 		//tree.levelOrder();
 		//tree.inOrder();
 		//tree.preOrder();
@@ -49,8 +52,15 @@ public class Test {
 		//tree.allLeaves();
 		//tree.allFullNodes();
 		//tree.deepestNode();
-		tree.printLevelWise();
-		
-		
+		//tree.printLevelWise();
+		//tree.getDiameter();
+		//tree.printPathRootToLeaf();
+		//System.out.println("---------------");
+		//tree.sumExistInPath(15);
+		//tree.sumExistInPath(8);
+		//tree.sumExistInPath(16);
+		tree.sumExistInPath(100);
+		//tree.sumExistInPath(-10);
+		//tree.sumExistInPath(15);
 	}
 }

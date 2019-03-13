@@ -411,4 +411,91 @@ public class CustomeTree {
 		
 	}
 	
+	public void getDiameter() {
+		System.out.println(diameter(root,true));
+	}
+	//If diameter passes only through root
+	private int diameter(TreeNode root, boolean isRoot) {
+		int left = 0, right = 0;
+		if(root == null)
+			return 0;
+		
+		left = diameter(root.getLeft(), false);
+		right = diameter(root.getRight(), false);
+
+		
+		if(isRoot)
+			return left + right + 1;
+		else
+			return Math.max(left, right) + 1;
+	}
+	
+	public void printPathRootToLeaf() {
+		int length = 0; 
+		if(root == null)
+			return;
+		
+		printPath(root, new ArrayList<TreeNode>(), length);
+	}
+	
+	private void printPath(TreeNode node, ArrayList<TreeNode> arr, int length) {
+		if(node == null)
+			return;
+					
+		arr.add(length, node);
+		length++;
+		
+		if(node.getLeft() == null && node.getRight() == null) {
+			print(arr, length);
+		}
+		printPath(node.getLeft(), arr, length);
+		printPath(node.getRight(), arr, length);
+	}
+	
+	private void print(ArrayList<TreeNode> arr, int length) {
+		for(int i = 0; i < length; i++) {
+			System.out.print(arr.get(i).getData()+" ");
+		}
+		System.out.println();
+	}
+	
+	public void sumExistInPath(int sum) {
+		int length = 0; 
+		if(root == null)
+			return;
+		
+		sumPath(root, new ArrayList<TreeNode>(), length, sum);
+	}
+	
+	private void sumPath(TreeNode node, ArrayList<TreeNode> arr, int length, int sum) {
+		if(node == null)
+			return;
+					
+		sum = sum - node.getData();
+		if(sum > 0) {
+			arr.add(length, node);
+			length++;
+		}	
+		else if(sum == 0) {
+			arr.add(length, node);
+			length++;
+			print(arr, length);
+			return;
+		}else {
+			return;
+		}
+		
+		sumPath(node.getLeft(), arr, length, sum);
+		sumPath(node.getRight(), arr, length, sum);
+	}
+	
+	public void getMirror() {
+		if(root == null)
+			return;
+		
+		
+		
+	}
+		
+	
 }
