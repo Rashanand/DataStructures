@@ -59,8 +59,16 @@ public class Test {
 		//tree.sumExistInPath(15);
 		//tree.sumExistInPath(8);
 		//tree.sumExistInPath(16);
-		tree.sumExistInPath(100);
+		//tree.sumExistInPath(100);
 		//tree.sumExistInPath(-10);
 		//tree.sumExistInPath(15);
+		//tree.printLevelWise();
+		//tree.getMirror();
+		
+		//Test mirror
+		CustomeTree tree2 = tree.getMirror();
+		tree2.add(11);
+		
+		System.out.println(tree.checkMirror(tree.getRoot(), tree2.getRoot()));
 	}
 }

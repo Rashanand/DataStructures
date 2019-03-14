@@ -489,13 +489,103 @@ public class CustomeTree {
 		sumPath(node.getRight(), arr, length, sum);
 	}
 	
-	public void getMirror() {
+	public CustomeTree getMirror() {
+		if(root == null)
+			return null;
+		
+		printLevelWise();
+		
+		TreeNode newRoot = new TreeNode(root.getData());
+		
+		createMirror(root, newRoot);
+		
+		System.out.println("Original Tree :");
+		printLevelWise();
+		System.out.println("\n\nMirror Tree :");
+		printLevelWise(newRoot);
+		
+		CustomeTree mirrorTree = new CustomeTree();
+		mirrorTree.root = newRoot;
+		
+		return mirrorTree;
+	}
+	
+	private void createMirror(TreeNode root, TreeNode rootNew) {
 		if(root == null)
 			return;
 		
+		TreeNode left = root.getLeft();
+		TreeNode right = root.getRight();
 		
-		
+		if(left != null) {
+			rootNew.setRight(new TreeNode(left.getData()));
+			createMirror(left, rootNew.getRight());
+		}
+		if(right != null) {
+			rootNew.setLeft(new TreeNode(right.getData()));
+			createMirror(right, rootNew.getLeft());
+		}
+			
 	}
 		
+	private void printLevelWise(TreeNode root) {
+		if(root == null) {
+			System.out.println("Tree not initialized");
+			return ;
+		}
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		queue.add(null); //One level complete.
+		
+		int count = 0; // Counting the no of nodes on a level 
+		while(!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
+			
+			if(currNode == null) { //level complete.
+				System.out.println();
+				count++;
+				if(!queue.isEmpty())
+					queue.add(null);
+			}
+			else {
+				System.out.print(currNode.getData()+" ");
+				if(currNode.getLeft() != null) {
+					queue.add(currNode.getLeft());
+				}	
+				if(currNode.getRight() != null) {
+					queue.add(currNode.getRight());
+				}	
+			}
+		}
+		
+		
+		System.out.println("Height : "+count);
+	}
+	
+	public boolean checkMirror(TreeNode root1, TreeNode root2) {
+		boolean isMirror = true;
+		
+		if(root1 == null) {
+			if(root2 == null) {
+				return true;
+			}
+			return false;
+		}
+		
+		if(root1.getData() != root2.getData()) {
+			isMirror = false;
+			return isMirror;
+		}	
+		
+		isMirror = checkMirror(root1.getLeft(), root2.getRight());
+		isMirror = checkMirror(root1.getRight(), root2.getLeft());
+		
+		return isMirror;
+	}
+
+	public TreeNode getRoot() {
+		return root;
+	} 
 	
 }
