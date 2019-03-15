@@ -66,9 +66,24 @@ public class Test {
 		//tree.getMirror();
 		
 		//Test mirror
-		CustomeTree tree2 = tree.getMirror();
-		tree2.add(11);
+		//CustomeTree tree2 = tree.getMirror();
+		//tree2.add(11);
 		
-		System.out.println(tree.checkMirror(tree.getRoot(), tree2.getRoot()));
+		//System.out.println(tree.checkMirror(tree.getRoot(), tree2.getRoot()));
+		
+		//Test is foldable
+		TreeNode root = new TreeNode(10);
+		root.setLeft(new TreeNode(8));
+		root.setRight(new TreeNode(7));
+		root.getLeft().setLeft(new TreeNode(6));
+		root.getRight().setRight(new TreeNode(9));
+		root.getLeft().getLeft().setRight(new TreeNode(5));
+		root.getRight().getRight().setLeft(new TreeNode(4));
+		
+		CustomeTree foldedTree = new CustomeTree(root);
+		
+		foldedTree.printLevelWise();
+		
+		System.out.println(foldedTree.isFoldable());
 	}
 }

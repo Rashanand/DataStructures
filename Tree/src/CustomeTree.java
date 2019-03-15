@@ -5,6 +5,18 @@ import java.util.Stack;
 
 public class CustomeTree {
 	private TreeNode root;
+
+	public CustomeTree() {
+		//No - arg  
+	}
+	
+	public CustomeTree(int data) {
+		this.root = new TreeNode(data);
+	}
+	
+	public CustomeTree(TreeNode root) {
+		this.root = root;
+	}
 	
 	public boolean add(int data) {
 		TreeNode node = null;
@@ -588,4 +600,47 @@ public class CustomeTree {
 		return root;
 	} 
 	
+	//Check Foldable
+	public boolean isFoldable() {
+		if(root == null)
+			return true;
+		
+		return areFoldable(root.getLeft(), root.getRight());
+	}
+	
+	private boolean areFoldable(TreeNode root1, TreeNode root2) {
+		boolean isFoldAble = false;
+		if(root1 == null) {
+			if(root2 == null) {
+				return true;
+			}	
+			return false;
+		}
+		
+		isFoldAble = areFoldable(root1.getLeft(), root2.getRight());
+		isFoldAble = areFoldable(root1.getRight(), root2.getLeft());
+		
+		if(isFoldAble) {
+			if(root1 != null) {
+				if(root2 != null) {
+					isFoldAble = true; 
+				}
+			}
+		}
+		return isFoldAble;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
