@@ -8,7 +8,7 @@ public class BinarySearchTree {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	//Add node
 	public boolean add(int data) {
 		boolean isAdded = false;
 		
@@ -31,7 +31,7 @@ public class BinarySearchTree {
 					break;
 				}
 			}
-			if(data < currentNode.getData()) {
+			else if(data < currentNode.getData()) {
 				if(currentNode.getLeft() != null) {
 					currentNode = currentNode.getLeft();
 				}
@@ -49,7 +49,7 @@ public class BinarySearchTree {
 		
 		return isAdded;
 	}
-	
+	//Level order traversal
 	public void traverseLevelWise() {
 		if(root == null) {
 			System.out.println("Empty tree");
@@ -81,5 +81,36 @@ public class BinarySearchTree {
 				}
 			}
 		}
+	}
+	//Search
+	public boolean contains(int data) {
+		return contains(root, data);
+	}
+	
+	private boolean contains(Node node, int data) {
+		if(node == null) {
+			return false;
+		}
+		
+		if(node.getData() == data) {
+			return true;
+		}
+		else if(node.getData() > data) {
+			return contains(node.getLeft(), data);
+		}
+		else {
+			return contains(node.getRight(), data);
+		}
+	}
+	
+	public boolean delete(int data) {
+		return delete(root, data);
+	}
+	//Delete
+	private boolean delete(Node node, int data) {
+		if(node == null) {
+			return false;
+		}
+		return false;
 	}
 }
