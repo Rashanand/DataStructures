@@ -82,6 +82,22 @@ public class BinarySearchTree {
 			}
 		}
 	}
+	public void inOrderTraversal() {
+		if(root == null) {
+			return ;
+		}
+		inOrderTraversal(root);
+		System.out.println();
+	}
+	
+	private void inOrderTraversal(Node node) {
+		if(node == null) {
+			return ;
+		}
+		inOrderTraversal(node.getLeft());
+		System.out.print(node.getData()+"  ");
+		inOrderTraversal(node.getRight());
+	}
 	//Search
 	public boolean contains(int data) {
 		return contains(root, data);
@@ -103,14 +119,41 @@ public class BinarySearchTree {
 		}
 	}
 	
-	public boolean delete(int data) {
+	public Node delete(int data) {
 		return delete(root, data);
 	}
 	//Delete
-	private boolean delete(Node node, int data) {
+	private Node delete(Node node, int data) {
 		if(node == null) {
-			return false;
+			return null;
 		}
-		return false;
+		
+		if(data < node.getData()) {
+			node.setLeft(delete(node.getLeft(), data));
+		}
+		else if(data > node.getData()) {
+			node.setRight(delete(node.getRight(), data));
+		}
+		else {
+			if(node.getRight() == null) {
+				return node.getLeft();
+			}
+			if(node.getLeft() == null) {
+				return node.getRight();
+			}
+			
+			node.setData(minValue(node.getRight()));
+			
+			node.setRight(delete(node.getRight(), node.getData()));
+		}
+		
+		return node;
+	}
+	//To get the min value/ inorder successor for delete operation
+	private int minValue(Node node) {
+		if(node.getLeft() == null) {
+			return node.getData();
+		}
+		return minValue(node.getLeft());
 	}
 }
