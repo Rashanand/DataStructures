@@ -52,6 +52,11 @@ public class BSTtest {
 		bst.inOrderTraversal();
 		bst.traverseLevelWise();
 		
+		System.out.println("\nPreorder traversal");
+		bst.getBSTPreOrder();
+		
+		bst.constructfromPreOrderApp1(bst.getBSTPreOrder());
+		
 	}
 
 }
