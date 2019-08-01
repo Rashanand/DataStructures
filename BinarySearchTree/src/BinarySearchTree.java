@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class BinarySearchTree {
 	private Node root = null;
@@ -249,62 +250,69 @@ public class BinarySearchTree {
 	}
 	//Construct BST from its preorder
 	//Expensive method O(n^2)
-	public Node constructfromPreOrderApp1(ArrayList<Node> pre) {
+	public Node constructFromPreOrderApp1(ArrayList<Node> pre) {
 		if(pre == null || pre.size() < 1) {
 			return null;
 		}
 		
-		Node preRoot = constructfromPreOrder(pre, pre.get(0));
+		Node preRoot = constructFromPreOrder(pre, pre.get(0));
 		traverseLevelWise(preRoot);
 		inOrderTraversal(preRoot);
 		return preRoot;
 	}
-	private Node constructfromPreOrder(ArrayList<Node> preOrder, Node preRoot) {
+	private Node constructFromPreOrder(ArrayList<Node> preOrder, Node preRoot) {
 		ArrayList<Node> leftTree = null;
 		ArrayList<Node> rightTree = null;
 		
 		int treeSize = preOrder.size();
-		for(int i = 1; i < treeSize; i++) {
+		
+		//Initial case : when root is in the preorder
+		if(treeSize > 0 && preOrder.get(0).getData() == preRoot.getData()) {
+			preOrder.remove(0);
+			treeSize--;
+		}
+		
+		for(int i = 0; i < treeSize; i++) {
 			if(preOrder.get(i).getData() > preRoot.getData()) {
 				leftTree = new ArrayList<Node>(i);
-				for(int j = 1; j < i; j++) {
+				for(int j = 0; j < i; j++) {
 					leftTree.add(preOrder.get(j));
 				}
 				rightTree = new ArrayList<Node>((treeSize - i) + 1);
 				for(int k = i; k < treeSize; k++) {
 					rightTree.add(preOrder.get(k));
 				}
-				System.out.println(leftTree + "\n" + rightTree);
+				/*System.out.println(leftTree.stream().map(node -> node.getData()).collect(Collectors.toList())
+						+"  "+rightTree.stream().map(node -> node.getData()).collect(Collectors.toList()));*/
 				break;
 			}
 			
 		}
-		
-		if(treeSize > 0) {
-			//All the nodes less than root
-			if(leftTree == null && rightTree == null) {
-				int rootData = preOrder.get(0).getData();
-				if(rootData > preRoot.getData()) {
-					rightTree = preOrder;
-				}
-				else if(rootData < preRoot.getData()){
-					leftTree = preOrder;
-				}
+		//All the nodes less than root
+		if(leftTree == null && rightTree == null && treeSize > 0) {
+			int rootData = preOrder.get(0).getData();
+			if(rootData > preRoot.getData()) {
+				rightTree = preOrder;
 			}
-			if(leftTree != null) {
-				Node node = leftTree.remove(0);
-				preRoot.setLeft(constructfromPreOrder(leftTree, node));
-			}
-			if(rightTree != null) {
-				Node node = rightTree.remove(0);
-				preRoot.setRight(constructfromPreOrder(rightTree, node));
+			else if(rootData < preRoot.getData()){
+				leftTree = preOrder;
 			}
 		}
+		
+		if(leftTree != null && leftTree.size() > 0) {
+			Node node = leftTree.remove(0);
+			preRoot.setLeft(constructFromPreOrder(leftTree, node));
+		}
+		if(rightTree != null && rightTree.size() > 0) {
+			Node node = rightTree.remove(0);
+			preRoot.setRight(constructFromPreOrder(rightTree, node));
+		}
+		
 		return preRoot;
 	}
 	//Construct BST from its preorder
 	//2nd approach
-	public Node constructfromPreOrderApp2(ArrayList<Node> preOrder) {
-		return null;
-	}
+	
+	
+	
 }

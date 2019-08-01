@@ -19,21 +19,31 @@ public class BSTtest {
 		bst.add(14);
 		bst.add(1);
 		bst.add(18);
+		
 		/*
 			        5  
 				3      13  
 			  2   4  9    15  
 			1       8 12 14 18 
 		*/
-		//System.out.println("\nTraversal(Levelwise) : ");
+		
+		//Traversal start
+		System.out.println("\nTraversal(Levelwise) : ");
 		bst.traverseLevelWise();
 		
 		System.out.println("\nTraversal(In order) : ");
 		bst.inOrderTraversal();
 		
+		System.out.println("\nTraversal(Pre order) : ");
+		bst.getBSTPreOrder();
+		//Traversal end
+		
+		//Search start
 		System.out.println("\nSearch :");
 		System.out.println(bst.contains(10));
+		//Search end
 		
+		//Delete start
 		System.out.println("\nDelete (4 - leaf node) :");	
 		bst.delete(4);
 		System.out.println("Traversal(In order) : ");
@@ -51,11 +61,19 @@ public class BSTtest {
 		System.out.println("Traversal(In order) : ");
 		bst.inOrderTraversal();
 		bst.traverseLevelWise();
+		//Delete end
 		
-		System.out.println("\nPreorder traversal");
+		bst.add(4);
+		bst.add(2);
+		
+		//Construction start
+		System.out.println("\nPreorder traversal : ");
 		bst.getBSTPreOrder();
-		
-		bst.constructfromPreOrderApp1(bst.getBSTPreOrder());
+		System.out.println("\nConstruct BST from its Preorder traversal App1 O(n^2) : ");
+		bst.constructFromPreOrderApp1(bst.getBSTPreOrder());
+		System.out.println("\nConstruct BST from its Preorder traversal App2 O(n) : ");
+		//bst.constructFromPreOrderApp2(bst.getBSTPreOrder());
+		//Construction end
 		
 	}
 
