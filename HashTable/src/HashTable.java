@@ -38,7 +38,8 @@ public class HashTable {
 		return hashValue;
 	}
 	
-	public boolean put(Object key, Object value) {
+	public Object put(Object key, Object value) {
+		Object oldValue = null;
 		if(this.hashTable == null) {
 			return false;
 		}
@@ -58,24 +59,31 @@ public class HashTable {
 			}
 			else {
 				Node currNode = start;
+				Node prevNode = start;
 				boolean areUnique = false;
 				while(currNode != null) {
-					areUnique = this.compareKeys(key, currNode.getData().getKey());
+					areUnique = this.compareKeys(key, prevNode.getData().getKey());
 					if(! areUnique) {
 						break;
 					}
 					
+					prevNode = currNode;
 					currNode = currNode.getNext();
 				}
+				//the previous value associated with key; else null
 				if(areUnique) {
 					Node node = new Node(entry);
-					currNode.setNext(node);
+					prevNode.setNext(node);
 					addEntry = true;
+				}
+				else {
+					oldValue = prevNode.getData().getValue();
+					prevNode.setData(entry);
 				}
 			}
 		}
 		this.increaseSize(addEntry);
-		return addEntry;
+		return oldValue;
 	}
 	private boolean compareKeys(Object key1, Object key2) {
 		boolean areUnique = false;
@@ -98,6 +106,75 @@ public class HashTable {
 		return this.size;
 	}
 	
+	public boolean containsKey(Object key) {
+		boolean keyFound = false;
+		int bucket = -1;
+		
+		bucket = doHash(key);
+		
+		if(bucket != -1) {
+			Node start = hashTable[bucket];
+			
+			if(start != null) {
+				while(start != null) {
+					Object nodeKey = start.getData().getKey();
+					if(compareKeys(key, nodeKey)) {
+						keyFound = true;
+						break;
+					}
+					start = start.getNext();
+				}
+			}
+		}
+		
+		return keyFound;
+	}
+	
+	public Object get(Object key) {
+		Object value = null;
+		int bucket = -1;
+		
+		bucket = doHash(key);
+		
+		if(bucket != -1) {
+			Node start = hashTable[bucket];
+			while(start != null) {
+				Object nodeKey = start.getData().getKey();
+				if(compareKeys(key, nodeKey)) {
+					value = start.getData().getValue();
+				}
+				start = start.getNext();
+			}
+		}
+		
+		return value;
+	}
+	
+	//Replace
+	/*Object put(Object key, Object newVal)
+	 
+	  Parameters: key - key with which the specified value is to be associated
+				  value - value to be associated with the specified key
+	  Returns: the previous value associated with key, or null if there was no mapping for key.*/
+	public Object replace(Object key, Object newVal) {
+		Object oldVal = null;
+		int bucket = -1;
+		
+		bucket = doHash(key);
+		if(bucket != -1) {
+			Node start = hashTable[bucket];
+			Node prevNode = start;
+			
+			while(start != null) {
+				
+			}
+		}
+		
+		return oldVal;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer("[");
@@ -107,14 +184,14 @@ public class HashTable {
 			if(node != null) {
 				while(node != null) {
 					sb.append(node.toString());
-					sb.append(", ");
+					sb.append("; ");
 					node = node.getNext();
 				}
 			}
 		}
 		
 		int length = sb.length();
-		if(sb.lastIndexOf(",") == length - 2) {
+		if(sb.lastIndexOf(";") == length - 2) {
 			sb.delete(length - 2, length);
 		}
 		
